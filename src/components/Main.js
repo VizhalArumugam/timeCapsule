@@ -3,6 +3,11 @@ import futuristicVid from "../videos/futuristic.mp4";
 import "../styles/main1.css";
 import retroImg from "../images/retroCard.jpg"; 
 import { TextField, Button, Box } from "@mui/material"; // Importing MUI components
+import icon from "../icons/mail.svg"
+import icon1 from "../icons/chat.svg"
+import icon2 from "../icons/diary.svg"
+import Mail from "./Mail";
+import Chat from "./Chat";
 
 export default function Main() {
     const [content, setContent] = useState("Dear future, Harsith!");
@@ -18,7 +23,7 @@ export default function Main() {
         const intervalId = setInterval(() => {
             setBoxShadow(prevBoxShadow => 
                 prevBoxShadow === "0 0 80px rgba(4,230,251,1)" 
-                ? "0 0 30px rgb(255, 255, 255)" 
+                ? "0 0 30px rgba(255, 255, 255,1)" 
                 : "0 0 80px rgba(4,230,251,1)"
             );
         }, 1000);
@@ -52,57 +57,32 @@ export default function Main() {
 
             <div className="options-container">
                 <div>
-                    <Box className="option" sx={{ boxShadow: boxShadow }} />
-                    <Box className="option" sx={{ boxShadow: boxShadow }} />
+                    <Box className="option" sx={{ 
+                        boxShadow: boxShadow
+
+                        }}>
+                        <img src={icon} alt="" />
+                    </Box>
+                    <Box className="option" sx={{ 
+                        boxShadow: boxShadow
+
+                        }}>
+                        <img src={icon1} alt="" />
+                    </Box>
                 </div>
                 <div>
-                    <Box className="option" sx={{ boxShadow: boxShadow }} />
+                <Box className="option" sx={{ 
+                        boxShadow: boxShadow
+
+                        }}>
+                        <img src={icon2} alt="" />
+                    </Box>
                     <Box className="option" sx={{ boxShadow: boxShadow }} />
                 </div>
             </div>
 
-            <div className="retro-card">
-            <TextField
-    multiline
-    rows={10}
-    variant="outlined"
-    value={content}
-    onChange={handleChange}
-    fullWidth
-    sx={{
-        marginBottom: "20px",
-        backgroundColor: "transparent", 
-        height: "500px", 
-        width: "500px",  
-        resize: "none",
-        padding: "25px", 
-        fontFamily: "'Courier New', Courier, monospace", 
-        whiteSpace: "pre-wrap", 
-        overflowY: "auto", 
-        transition:"box-shadow 2s",
-        outline:"none",
-        "& .MuiOutlinedInput-root": {
-            "& fieldset": {
-                borderColor: "transparent",
-            },
-            "&:hover fieldset": {
-                borderColor: "transparent", 
-            },
-            "&.Mui-focused fieldset": {
-                borderColor: "transparent", 
-            }
-        }
-    }}
-/>
-
-
-                <Button
-                    variant="contained"
-                    sx={{ boxShadow: boxShadow, backgroundColor: "rgba(4, 230, 251, 0.8)" }}
-                >
-                    Send to Future
-                </Button>
-            </div>
+            {/*<Mail handleChange={handleChange} content={content} boxShadow={boxShadow}/>*/}
+            <Chat />
         </div>
     );
 }
