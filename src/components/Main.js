@@ -1,8 +1,8 @@
 import React, { useEffect, useState,useRef } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from react-router-dom
+import { useNavigate } from "react-router-dom"; 
 import futuristicVid from "../videos/futuristic.mp4";
 import "../styles/main1.css";
-import { Box } from "@mui/material"; // Importing MUI components
+import { Box } from "@mui/material"; 
 import icon from "../icons/mail.svg";
 import icon1 from "../icons/chat.svg";
 import icon2 from "../icons/diary.svg";
@@ -16,15 +16,14 @@ export default function Main(props) {
     const [isDateAppended, setIsDateAppended] = useState(false);
     const [boxShadow, setBoxShadow] = useState("0 0 80px rgba(4,230,251,1)");
     const [optionNumber, setOptionNumber] = useState(1);
-    const navigate = useNavigate(); // Initialize navigate hook
+    
+    const navigate = useNavigate(); 
 
 
     const audioRef = useRef(null); 
-    
-      // Function to play the audio when the capsule is clicked
       const playAudio = () => {
         if (audioRef.current) {
-          audioRef.current.play(); // Play the audio
+          audioRef.current.play(); 
         }
       };
 
@@ -36,7 +35,7 @@ export default function Main(props) {
 
     function handleHomeClick() {
         props.updatePage();
-        navigate("/"); // Navigate back to the home page
+        navigate("/"); 
     }
 
     useEffect(() => {
@@ -63,6 +62,7 @@ export default function Main(props) {
         setContent(e.target.value);
     };
 
+    
     return (
         <div className="outer-container">
             <div className="sparkle"></div>
