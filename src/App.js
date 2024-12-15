@@ -1,20 +1,46 @@
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect, useRef } from 'react'; 
 import './styles/main.css';
 import background from './images/background.jpg';
 import grass from './images/grass.png';
-import Main from './components/Main';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
+import Main from "./components/Main.js";
+import LoadingSpinner from './components/LoadingSpinner';
+import eggcrack from './sounds/eggcrack.m4a'
 function App() {
   const [boxShadow, setBoxShadow] = useState("0 0 80px rgba(245, 237, 4, 1)");
   const [displayText, setDisplayText] = useState("");
+  const [pgNumber, setPgNumber] = useState(1);
+  const [loading, setLoading] = useState(false);  // Loading state
 
-  const text = ['Hey!','I am, Rizen','Wondering, What it is?','You wont believe me','It is a','Time Capsule!!',"Click it's top"]
+  // Create a reference to the audio element
+  const audioRef = useRef(null); 
+
+  // Function to play the audio when the capsule is clicked
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.play(); // Play the audio
+    }
+  };
+
+  function updatePage() {
+    playAudio();
+    setLoading(true); // Set loading to true when switching pages
+    setPgNumber((p) => {
+      p = p === 1 ? 2 : 1;
+      return p;
+    });
+
+     // Play audio when the page is updated
+  }
+
+  const text = ['Hey!', 'I am, Rizen', 'Wondering, What it is?', 'You wont believe me', 'It is a', 'Time Capsule!!', "Click on it's top"];
+  
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setBoxShadow(prevBoxShadow => 
-        prevBoxShadow === "0 0 80px rgba(245, 237, 4, 1)" 
-        ? "0 0 30px rgb(255, 255, 255)" 
-        : "0 0 80px rgba(245, 237, 4, 1)"
+      setBoxShadow((prevBoxShadow) =>
+        prevBoxShadow === "0 0 80px rgba(245, 237, 4, 1)"
+          ? "0 0 30px rgb(255, 255, 255)"
+          : "0 0 80px rgba(245, 237, 4, 1)"
       );
     }, 1000);
 
@@ -22,13 +48,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    let i = 0; // Index to track current text
+    let i = 0; 
     const textInterval = setInterval(() => {
-
-
-      window.speechSynthesis.onvoiceschanged = () => {
-        console.log("Voices updated:", window.speechSynthesis.getVoices());
-      };
       const text1 = text[i];
       if (!text1) {
         alert("Please enter some text to speak!");
@@ -36,70 +57,83 @@ function App() {
       }
 
       const utterance = new SpeechSynthesisUtterance(text1);
-
-      utterance.pitch = 1.0; 
-      utterance.rate = 0.9;  
-      utterance.volume = 0.1;  
+      utterance.pitch = 1.0;
+      utterance.rate = 0.9;
+      utterance.volume = 0.1;
 
       const voices = window.speechSynthesis.getVoices();
-      const femaleVoice = voices.find(voice => voice.name === 
-        "Microsoft Steffan Online (Natural) - English (United States)");
+      const femaleVoice = voices.find(voice => voice.name === "Microsoft Steffan Online (Natural) - English (United States)");
 
       if (femaleVoice) {
         utterance.voice = femaleVoice;
-      } else {
-        console.log("Female voice not found, using default voice.");
       }
 
       window.speechSynthesis.speak(utterance);
 
-
-
-
-
-
-
-
-
-
-
-
-      setDisplayText(text[i]); 
+      setDisplayText(text[i]);
       i++;
       if (i >= text.length) {
-        clearInterval(textInterval); 
+        clearInterval(textInterval);
       }
-    }, 2500); 
+    }, 2500);
 
-    return () => clearInterval(textInterval); 
-  }, []); 
+    return () => clearInterval(textInterval);
+  }, []);
+
+  // Set a small timeout to stop the loading effect after page change
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setLoading(false);  // Stop loading after a delay
+      }, 1000);  // Adjust the time as per the loading effect duration
+
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
 
   return (
-    /*<div className="outer">
-      <div className="head">
-        <h5>RIZEN TORQUE</h5>
-        <div className="about">
-          <h6>Front-end</h6>
-          <h6>Back-end</h6>
-          <h6>Documentation</h6>
-        </div>
-      </div>
-      
-      <div className="hero">
-        <div className="display-area">{displayText}</div>
-        <div className="sparkle"></div>
-        <div className="sparkle"></div>
-        <div className="sparkle"></div>
-        <div className="sparkle"></div>
-        <div className="sparkle"></div>
-        <div className="sparkle"></div>
-        <div className="capsule-container" style={{ boxShadow: boxShadow }}>
-          <div className="capsule"></div>
-        </div>
-        <img src={grass} alt="grass" />
-      </div>
-    </div>*/
-    <Main/>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className={`page-container ${loading ? "loading" : ""}`}>
+              {/* Overlay for dull effect */}
+              {loading && <div className="loading-overlay"></div>}
+  
+              {loading ? (
+                <LoadingSpinner /> // Show loading spinner while loading
+              ) : pgNumber === 1 ? (
+                <div className="outer">
+                  <div className="head">
+                    <h5>RIZEN TORQUE</h5>
+                    <div className="about">
+                      <h6>Front-end</h6>
+                      <h6>Back-end</h6>
+                      <h6>Documentation</h6>
+                    </div>
+                  </div>
+  
+                  <div className="hero">
+                    <div className="display-area">{displayText}</div>
+                    <div className="sparkle"></div>
+                    <div className="capsule-container" style={{ boxShadow: boxShadow }}>
+                      <div className="capsule" onClick={updatePage}></div>
+                    </div>
+                    <img src={grass} alt="grass" />
+                  </div>
+                </div>
+              ) : (
+                <Main updatePage={updatePage} />
+              )}
+            </div>
+          }
+        />
+      </Routes>
+
+      {/* Audio element that will be played when capsule is clicked */}
+      <audio ref={audioRef} src={eggcrack} preload="auto"></audio>
+    </Router>
   );
 }
 
