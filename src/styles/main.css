@@ -1,0 +1,165 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  cursor: url("../icons/cursor.png"), auto;
+  background-image: url("../images/background.jpg");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.outer .head {
+  padding: 20px 20px;
+  color: #fff;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.outer .head .about {
+  width: 400px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.outer .head h5 {
+  font-size: 25px;
+}
+.outer .head h6 {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 400;
+  transition: color 0.15s;
+}
+.outer .head h6:hover {
+  color: rgb(255, 78, 223);
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100vh;
+  width: 100%;
+  background-image: url("../images/grass.png"); /* Add the grass image as background */
+  background-repeat: repeat-x; /* Repeat grass image in x direction */
+  background-position: bottom; /* Align it to the bottom */
+}
+
+.capsule {
+  cursor: pointer;
+  width: 180px;
+  height: 300px;
+  border-radius: 50%;
+  margin-bottom: 70px;
+  position: relative;
+  background-image: linear-gradient(45deg, rgb(255, 0, 132), rgb(255, 0, 208), rgb(0, 34, 255)); /* Initial gradient */
+  background-size: 400% 400%; /* Ensures that the gradient will change colors across the capsule */
+  /* Glowing effect */
+  box-shadow: inset 0 0 30px rgb(9, 9, 9);
+  transition: box-shadow 20s ease;
+}
+
+.capsule-container {
+  width: 180px;
+  height: 300px;
+  border-radius: 50%;
+  box-shadow: 0 0 50px rgb(245, 237, 4);
+  transition: box-shadow 1s;
+}
+
+img {
+  position: absolute;
+  bottom: -10px;
+  z-index: 1; /* Ensure the grass image stays behind the capsule */
+}
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: yellow;
+  opacity: 0;
+  animation: sparkleAnimation 3s infinite, moveAnimation 5s linear infinite;
+}
+
+/* Random movement animation */
+@keyframes moveAnimation {
+  0% {
+    top: 10%;
+    left: 10%;
+  }
+  25% {
+    top: 80%;
+    left: 25%;
+  }
+  50% {
+    top: 50%;
+    left: 80%;
+  }
+  75% {
+    top: 30%;
+    left: 60%;
+  }
+  100% {
+    top: 10%;
+    left: 0%;
+  }
+}
+@keyframes sparkleAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+.sparkle:nth-child(1) {
+  animation-delay: 0s, 0s;
+}
+
+.sparkle:nth-child(2) {
+  animation-delay: 0.5s, 1s;
+}
+
+.sparkle:nth-child(3) {
+  animation-delay: 1s, 1.5s;
+}
+
+.display-area {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  color: #fff;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  animation: fadeInOut 2.5s infinite;
+  transition: opacity 0.15s;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}/*# sourceMappingURL=main.css.map */
