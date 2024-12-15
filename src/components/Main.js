@@ -62,16 +62,40 @@ export default function Main() {
             </div>
 
             <div className="retro-card">
-                <TextField
-                    label="Write to your future self"
-                    multiline
-                    rows={4}
-                    variant="outlined"
-                    value={content}
-                    onChange={handleChange}
-                    fullWidth
-                    sx={{ boxShadow: boxShadow, marginBottom: "20px" }}
-                />
+            <TextField
+    multiline
+    rows={10}
+    variant="outlined"
+    value={content}
+    onChange={handleChange}
+    fullWidth
+    sx={{
+        marginBottom: "20px",
+        backgroundColor: "transparent", 
+        height: "500px", 
+        width: "500px",  
+        resize: "none",
+        padding: "25px", 
+        fontFamily: "'Courier New', Courier, monospace", 
+        whiteSpace: "pre-wrap", 
+        overflowY: "auto", 
+        transition:"box-shadow 2s",
+        outline:"none",
+        "& .MuiOutlinedInput-root": {
+            "& fieldset": {
+                borderColor: "transparent",
+            },
+            "&:hover fieldset": {
+                borderColor: "transparent", 
+            },
+            "&.Mui-focused fieldset": {
+                borderColor: "transparent", 
+            }
+        }
+    }}
+/>
+
+
                 <Button
                     variant="contained"
                     sx={{ boxShadow: boxShadow, backgroundColor: "rgba(4, 230, 251, 0.8)" }}
