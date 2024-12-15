@@ -8,6 +8,65 @@ button {
   cursor: pointer;
 }
 
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: yellow;
+  opacity: 0;
+  animation: sparkleAnimation 3s infinite, moveAnimation 5s linear infinite;
+}
+
+/* Random movement animation */
+@keyframes moveAnimation {
+  0% {
+    top: 10%;
+    left: 10%;
+  }
+  25% {
+    top: 80%;
+    left: 25%;
+  }
+  50% {
+    top: 50%;
+    left: 80%;
+  }
+  75% {
+    top: 30%;
+    left: 60%;
+  }
+  100% {
+    top: 10%;
+    left: 0%;
+  }
+}
+@keyframes sparkleAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+.sparkle:nth-child(1) {
+  animation-delay: 0s, 0s;
+}
+
+.sparkle:nth-child(2) {
+  animation-delay: 0.5s, 1s;
+}
+
+.sparkle:nth-child(3) {
+  animation-delay: 1s, 1.5s;
+}
+
 .outer-container {
   display: flex;
   align-items: center;
@@ -16,7 +75,7 @@ button {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  background-image: url("../images/woodenTable.jpg");
+  background-image: url("../images/background.jpg");
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -28,13 +87,13 @@ button {
   top: 50%;
   width: 100%;
   height: auto;
-  transform: translate(-50%, -50%) rotate(90deg);
   border-radius: 50%;
   border: 20px solid #fff;
   transition: opacity 0.2s;
   -o-object-fit: cover;
      object-fit: cover;
   box-shadow: 0px 0px 80px rgb(4, 230, 251);
+  transform: translate(-50%, -50%) rotate(90deg);
 }
 
 video:hover {
@@ -49,16 +108,14 @@ video:hover {
   position: relative;
   height: 500px;
   width: 500px;
-  background-image: url("../images/retroCard.jpg");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: rgba(1, 39, 104, 0.8);
   margin-right: 100px;
-  box-shadow: 0px 0px 50px rgb(0, 0, 0);
-  border-radius: 5px;
+  box-shadow: 0px 0px 50px rgb(4, 230, 251);
+  border-radius: 10px;
 }
 .retro-card textarea {
-  font-family: "Playwrite NL Guides";
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
   height: 500px;
   width: 500px;
   resize: none;
@@ -72,9 +129,14 @@ video:hover {
 }
 .retro-card button {
   margin-bottom: 30px;
-  color: rgb(97, 5, 5);
+  color: rgb(255, 255, 255);
   background-color: transparent;
   padding: 15px 30px;
-  border: 2px solid rgb(97, 5, 5);
+  border: 2px solid rgb(255, 255, 255);
   border-radius: 30px;
+  transition: color 0.5s, background-color 0.5s;
+}
+.retro-card button:hover {
+  color: rgb(1, 39, 104);
+  background-color: rgb(255, 255, 255);
 }/*# sourceMappingURL=main1.css.map */

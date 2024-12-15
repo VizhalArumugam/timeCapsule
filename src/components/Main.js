@@ -25,7 +25,14 @@ export default function Main() {
 
     return (
         <div className="outer-container">
+            <div className="sparkle"></div>
+            <div className="sparkle"></div>
+            <div className="sparkle"></div>
+            <div className="sparkle"></div>
+            <div className="sparkle"></div>
+            <div className="sparkle"></div>
             <div className="options-container">
+                
                 <video src={futuristicVid} autoPlay loop muted>
                     Your browser does not support the video tag.
                 </video>
