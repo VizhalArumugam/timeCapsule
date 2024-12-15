@@ -8,6 +8,7 @@ import icon1 from "../icons/chat.svg"
 import icon2 from "../icons/diary.svg"
 import Mail from "./Mail";
 import Chat from "./Chat";
+import Diary from "./Diary";
 
 export default function Main() {
     const [content, setContent] = useState("Dear future, Harsith!");
@@ -51,7 +52,7 @@ export default function Main() {
             <div className="sparkle"></div>
             <div className="sparkle"></div>
 
-            <video src={futuristicVid} autoPlay loop muted>
+            <video className="vid" src={futuristicVid} autoPlay loop muted>
                 Your browser does not support the video tag.
             </video>
 
@@ -81,8 +82,9 @@ export default function Main() {
                 </div>
             </div>
 
-            {/*<Mail handleChange={handleChange} content={content} boxShadow={boxShadow}/>*/}
-            <Chat />
+            {<Mail handleChange={handleChange} content={content} boxShadow={boxShadow}/>}
+            {/*<Chat />*/}
+            {/*<Diary />*/}
         </div>
     );
 }

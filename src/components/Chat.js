@@ -36,6 +36,7 @@ const Chat = () => {
         boxShadow:"0px 0px 30px rgba(0, 255, 255,1)"
       }}
     >
+        <h2>TALK TO YOUR FUTURE</h2>
       {/* Chat Messages Section */}
       <Box
         sx={{
