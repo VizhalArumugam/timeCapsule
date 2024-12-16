@@ -1,10 +1,13 @@
 ![Build-A-Site](https://i.imgur.com/nZPQ9If.png)
 
-# Website Name (Rizen Torque)
+# Website Name - Rizen Torque
 
-A brief description of your website goes here. For example:
+## Note
 
-> "The "Time Capsule - Future Self Letter Platform" is an innovative application designed to empower users to reflect on their present lives and connect with their future selves. This platform allows users to write heartfelt letters, set a delivery date, and optionally attach photos or videos to capture memories vividly. With advancements in digital technology, the ability to time-capsule thoughts and emotions in an automated manner has become more feasible and accessible. This project aims to offer an intuitive and secure interface for creating and delivering personalized time capsules through email."
+> "For API Calls and Sending Email, Subscription is Required so backend servers did not get linked in firebase hosting.
+
+## Description
+> "The Rizen Torque is an innovative application designed to empower users to reflect on their present lives and connect with their future selves. This platform allows users to write heartfelt letters, set a delivery date, and optionally attach photos or videos to capture memories vividly. With advancements in digital technology, the ability to time-capsule thoughts and emotions in an automated manner has become more feasible and accessible. This project aims to offer an intuitive and secure interface for creating and delivering personalized time capsules through email."
 
 ---
 
@@ -21,44 +24,67 @@ A brief description of your website goes here. For example:
 
 ## Features
 
-- [Feature 1] (e.g., Responsive design)
-- [Feature 2] (e.g., User authentication)
-- [Feature 3] (e.g., Dynamic content rendering)
-- [Feature 4] (e.g., SEO-friendly structure)
+- **Time Capsule Emailing** : <br>
+    Users can send emails to their future selves, scheduled for delivery at a later time,
+    allowing them to leave messages for the future.
+- **Talk to Your Future** : <br>
+    The app integrates an AI chat feature where users can converse with an advanced
+    version of themselves from the future. This uses a Hugging Face API for natural language processing and conversation.
+- **Sticky Notes** : <br>
+    Users can create, view, and manage sticky notes on their dashboard for quick
+    thoughts, reminders, or personal messages.
+- **File Attachments** : <br>
+    The app allows users to attach files (images, videos) to their scheduled emails and
+    view file previews before sending them.
 
 ## Technologies Used
 
-- **Frontend**: [HTML, CSS, JavaScript, React, Vue.js, Angular, or other frameworks]
-- **Backend**: [Node.js, Django, Flask, Ruby on Rails, ASP.NET, or others]
-- **Database**: [MongoDB, MySQL, PostgreSQL, Firebase, or others]
-- **Styling**: [Tailwind CSS, Bootstrap, SCSS, Material UI, or others]
-- **APIs**: [REST, GraphQL, or custom APIs]
-- **Hosting**: [Vercel, Netlify, Heroku, AWS, Azure, or other platforms]
+- **Frontend**: React, Material UI, HTML, CSS, JavaScript
+- **Backend**: Node.js, Express, Nodemailer (for email functionality), Hugging Face API (for AI chatresponses), Multer (for file uploads)
+- **Styling**: Material UI, custom CSS for app-specific design
+- **APIs**: REST APIs for email sending and file attachment handling , Hugging Face API for AI-powered chat with the future
+- **Hosting**: Firebase
 
 ---
 
 ## Installation
 
 ### Prerequisites
-[Add the prerequisites to run the website here]
+- Node.js (v14 or higher) installed on your machine.
+- npm (comes with Node.js) or yarn for managing dependencies.
+- Gmail API Access or SMTP server credentials (for Nodemailer email functionality).
+- Hugging Face API Key (for the AI chat functionality).
 
 ### Steps to run the project
-[Add the instructions to run the website here]
+- Using Firebase:
+  - Make sure to run the files under /src/backend (Ensure express is installed)
+    - Server.js
+    - In a new terminal, run Mistral.js
+  - Then you can access the app using the given firebase url
+- Via code
+  - Make sure to run the files under /src/backend (Ensure express is installed)
+    - Server.js
+    - In a new terminal, run Mistral.js
+  - In a new terminal
+    - Run npm start, after changing to the timecapsule directory
 
 ## Usage
 
-1. Describe how to use your website, e.g., "Navigate to the home page, log in, and explore various features like [feature examples]."
-2. Provide any credentials if applicable for testing (e.g., demo accounts).
+1. Navigate to the home page, click on the top of the capsule to open and explorevarious features like StickyNotes, Talk to Your Future(AI Chatbot) and Email Schedule
+2. Set the UserName on the top, so that the application uses it while scheduling messages and in Notes.
+3. Explore Features in the Sidebar - Email Schedule, Diary and Talk to Your Future.
+4. Write a letter, click on the button &quot;SEND TO FUTURE&quot; , Fill in the email address and Schedule date to receive mail.
+5. In the Notes, User can take notes and can be sent to mail.
 
 ---
 
 ## Screenshots
 
-![Screenshot 1](path/to/screenshot1.png)
-*Caption for the screenshot.*
+![Home Page](https://github.com/user-attachments/assets/0905140f-7e8e-4cfe-9db5-5e65543aa3ff)
+*Home Page - Click on the capsule to open*
 
-![Screenshot 2](path/to/screenshot2.png)
-*Caption for the screenshot.*
+![Mail PAge](https://github.com/user-attachments/assets/c0deaf96-9b1f-4b77-a54c-1e74a75374a2)
+*Mail Page - Explore the Features in the Sidebar*
 
 ---
 
@@ -66,11 +92,10 @@ A brief description of your website goes here. For example:
 
 We thank the following people for their contributions to this project:
 
-- **[Name 1]** - [GitHub Profile](https://github.com/name1)
-- **[Name 2]** - [GitHub Profile](https://github.com/name2)
-- **[Name 3]** - [GitHub Profile](https://github.com/name3)
-
-Feel free to add your name if you contribute to this project during the Build-A-Site hackathon!
+- **Harsith S** - [GitHub Profile](https://github.com/Harsith2k5)
+- **Hemanth R** - [GitHub Profile](https://github.com/Hemanh07)
+- **Numaan A** - [GitHub Profile](https://github.com/mohammednumaan)
+- **Vizhal A** - [GitHub Profile](https://github.com/VizhalArumugam)
 
 ---
 
@@ -78,7 +103,7 @@ Feel free to add your name if you contribute to this project during the Build-A-
 
 For any inquiries or feedback, reach out to:
 
-- **Your Name**
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
-- **GitHub**: [github.com/your-username](https://github.com/your-username)
-- **Website**: [your-website.com](https://your-website.com)
+- **Harsith S**
+- **Email**: [23z161@psgitech.ac.in](mailto:23z161@psgitech.ac.in)
+- **GitHub**: [Harsith2k5](https://github.com/Harsith2k5)
+- **Website**: [Rizen Torque Website](https://rizentorque-8fc4f.web.app)
