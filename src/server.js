@@ -28,12 +28,7 @@ const scheduleEmail = (to, subject, text, attachment, scheduleDate) => {
     to,
     subject,
     text,
-    attachments: [
-      {
-        filename: attachment.originalname,
-        path: attachment.path,
-      },
-    ],
+    attachments: attachment ? [{ filename: attachment.originalname, path: attachment.path }] : [], // Only add attachment if it exists
   };
 
   // Schedule the email
@@ -50,8 +45,8 @@ const scheduleEmail = (to, subject, text, attachment, scheduleDate) => {
 // Endpoint to send an email immediately or schedule it
 app.post('/send-email', upload.single('attachment'), async (req, res) => {
   const { to, subject, text, schedule } = req.body;
-  const attachment = req.file;
-  
+  const attachment = req.file; // Check if there's an attachment
+
   try {
     let scheduleDate = new Date(schedule);
 
@@ -67,12 +62,7 @@ app.post('/send-email', upload.single('attachment'), async (req, res) => {
         to,
         subject,
         text, // Now correctly passed text from frontend
-        attachments: [
-          {
-            filename: attachment.originalname,
-            path: attachment.path,
-          },
-        ],
+        attachments: attachment ? [{ filename: attachment.originalname, path: attachment.path }] : [], // Only add attachment if it exists
       };
 
       const info = await transporter.sendMail(mailOptions);

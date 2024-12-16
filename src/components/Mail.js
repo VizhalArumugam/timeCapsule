@@ -20,7 +20,6 @@ export default function Mail(props) {
   };
 
   const handleSubmit = async () => {
-    // Prompt user for email address
     const recipientEmail = prompt("Please enter the recipient's email address:");
 
     if (!recipientEmail || !validateEmail(recipientEmail)) {
@@ -28,39 +27,39 @@ export default function Mail(props) {
       return;
     }
 
-    // Prompt for schedule time if needed
     const scheduleInput = prompt("Enter the schedule time in YYYY-MM-DD HH:MM format (or leave empty for immediate):");
-
-    // If a schedule is entered, validate the time format
     const scheduledDate = scheduleInput ? new Date(scheduleInput) : null;
+
     if (scheduleInput && isNaN(scheduledDate)) {
       alert("Invalid date format");
       return;
     }
 
-    // Prepare form data to send
     const formData = new FormData();
     formData.append("to", recipientEmail);
-    formData.append("subject", "Scheduled Email"); // You can change this to any subject
-    formData.append("text", props.content); // Correctly get the text from the TextField
+    formData.append("subject", "Scheduled Email");
+    formData.append("text", props.Mailcontent); 
+
+    // Only append the file if it's selected
     if (file) {
       formData.append("attachment", file);
     }
+
+    // Only append the schedule if it's provided
     if (scheduledDate) {
-      formData.append("schedule", scheduledDate.toISOString()); // Add scheduled date to the form
+      formData.append("schedule", scheduledDate.toISOString());
     }
 
     try {
       const response = await axios.post("http://localhost:5000/send-email", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
-      alert(response.data.message); // Show success message
+      alert(response.data.message); 
     } catch (error) {
-      alert("Error sending email"); // Show error message
+      alert("Error sending email"); 
     }
-  };
+};
+
 
   // Validate email address
   const validateEmail = (email) => {
