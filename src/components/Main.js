@@ -12,13 +12,18 @@ import Diary from "./Diary";
 import clickSound from "../sounds/click-10.mp3"
 
 export default function Main(props) {
-    const [content, setContent] = useState("Dear future, Harsith!");
+    const [content, setContent] = useState("Dear future!");
     const [isDateAppended, setIsDateAppended] = useState(false);
     const [boxShadow, setBoxShadow] = useState("0 0 80px rgba(4,230,251,1)");
     const [optionNumber, setOptionNumber] = useState(1);
     
     const navigate = useNavigate(); 
 
+    const [Mailcontent, setMailContent] = useState(""); // Manage content state
+
+    const handleContentChange = (event) => {
+        setMailContent(event.target.value); // Update content state when the user types
+    };
 
     const audioRef = useRef(null); 
       const playAudio = () => {
@@ -96,7 +101,12 @@ export default function Main(props) {
             </div>
 
             {optionNumber === 1 ? (
-                <Mail handleChange={handleChange} content={content} boxShadow={boxShadow} />
+                <Mail 
+                handleChange={handleChange} 
+                content={content} 
+                Mailcontent={Mailcontent} // Pass content as prop
+                handleContentChange={handleContentChange}
+                boxShadow={boxShadow} />
             ) : optionNumber === 2 ? (
                 <Chat />
             ) : (

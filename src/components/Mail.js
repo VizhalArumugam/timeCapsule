@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
-import "../styles/main1.css";
-import { TextField, Button, Box, IconButton ,Typography} from "@mui/material"; // Importing MUI components
+import { TextField, Button, Box, IconButton, Typography } from "@mui/material"; // Importing MUI components
 import FolderIcon from "@mui/icons-material/Folder"; // Import Folder Icon
+import axios from "axios"; // Axios for making API requests
 
 export default function Mail(props) {
   const [file, setFile] = useState(null); // To store the selected file
+  const [email, setEmail] = useState(""); // To store the entered email
+  const [scheduleTime, setScheduleTime] = useState(""); // To store schedule time
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0]; // Get the first selected file
@@ -16,6 +17,55 @@ export default function Mail(props) {
   const handleFolderClick = () => {
     // Open the file picker dialog
     document.getElementById("fileInput").click();
+  };
+
+  const handleSubmit = async () => {
+    // Prompt user for email address
+    const recipientEmail = prompt("Please enter the recipient's email address:");
+
+    if (!recipientEmail || !validateEmail(recipientEmail)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    // Prompt for schedule time if needed
+    const scheduleInput = prompt("Enter the schedule time in YYYY-MM-DD HH:MM format (or leave empty for immediate):");
+
+    // If a schedule is entered, validate the time format
+    const scheduledDate = scheduleInput ? new Date(scheduleInput) : null;
+    if (scheduleInput && isNaN(scheduledDate)) {
+      alert("Invalid date format");
+      return;
+    }
+
+    // Prepare form data to send
+    const formData = new FormData();
+    formData.append("to", recipientEmail);
+    formData.append("subject", "Scheduled Email"); // You can change this to any subject
+    formData.append("text", props.content); // Correctly get the text from the TextField
+    if (file) {
+      formData.append("attachment", file);
+    }
+    if (scheduledDate) {
+      formData.append("schedule", scheduledDate.toISOString()); // Add scheduled date to the form
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/send-email", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert(response.data.message); // Show success message
+    } catch (error) {
+      alert("Error sending email"); // Show error message
+    }
+  };
+
+  // Validate email address
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
   };
 
   return (
@@ -38,8 +88,8 @@ export default function Mail(props) {
         multiline
         rows={10}
         variant="outlined"
-        value={props.content}
-        onChange={props.handleChange}
+        value={props.Mailcontent}
+        onChange={props.handleContentChange} // Make sure this handler updates the props.content
         fullWidth
         sx={{
           marginBottom: "20px",
@@ -87,6 +137,7 @@ export default function Mail(props) {
       <Button
         variant="contained"
         sx={{ boxShadow: props.boxShadow, backgroundColor: "rgba(4, 230, 251, 0.8)" }}
+        onClick={handleSubmit} // Trigger the email send process
       >
         Send to Future
       </Button>

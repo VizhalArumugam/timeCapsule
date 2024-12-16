@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from "./components/Main.js";
 import LoadingSpinner from './components/LoadingSpinner';
 import eggcrack from './sounds/eggcrack.m4a'
+import EmailForm from './components/EmailForm.js';
+import Mail from './components/Mail.js';
 function App() {
   const [boxShadow, setBoxShadow] = useState("0 0 80px rgba(245, 237, 4, 1)");
   const [displayText, setDisplayText] = useState("");
@@ -13,6 +15,8 @@ function App() {
   const [loading, setLoading] = useState(false);  
   const [dev,setDev] = useState("");
   const audioRef = useRef(null); 
+
+
 
   const playAudio = () => {
     if (audioRef.current) {
@@ -156,6 +160,7 @@ function App() {
       {/* Audio element that will be played when capsule is clicked */}
       <audio ref={audioRef} src={eggcrack} preload="auto"></audio>
     </Router>
+    
   );
 }
 
