@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, IconButton, Typography } from "@mui/material"; // Importing MUI components
-import FolderIcon from "@mui/icons-material/Folder"; // Import Folder Icon
-import axios from "axios"; // Axios for making API requests
+import FolderIcon from "@mui/icons-material/Folder"; 
+import axios from "axios"; 
 
 export default function Mail(props) {
-  const [file, setFile] = useState(null); // To store the selected file
-  const [email, setEmail] = useState(""); // To store the entered email
-  const [scheduleTime, setScheduleTime] = useState(""); // To store schedule time
+  const [file, setFile] = useState(null); 
+  const [email, setEmail] = useState(""); 
+  const [scheduleTime, setScheduleTime] = useState(""); 
 
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0]; // Get the first selected file
-    setFile(selectedFile); // Store the file in the state
+    const selectedFile = e.target.files[0]; 
+    setFile(selectedFile); 
     console.log("Selected file:", selectedFile);
   };
 
   const handleFolderClick = () => {
-    // Open the file picker dialog
     document.getElementById("fileInput").click();
   };
 
@@ -40,12 +39,10 @@ export default function Mail(props) {
     formData.append("subject", "Scheduled Email");
     formData.append("text", props.Mailcontent); 
 
-    // Only append the file if it's selected
     if (file) {
       formData.append("attachment", file);
     }
 
-    // Only append the schedule if it's provided
     if (scheduledDate) {
       formData.append("schedule", scheduledDate.toISOString());
     }
@@ -61,7 +58,6 @@ export default function Mail(props) {
 };
 
 
-  // Validate email address
   const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
@@ -79,8 +75,8 @@ export default function Mail(props) {
         type="file"
         id="fileInput"
         style={{ display: "none" }}
-        onChange={handleFileChange} // Handle file selection
-        accept="image/*,video/*" // Accept image and video files
+        onChange={handleFileChange} 
+        accept="image/*,video/*" 
       />
 
       <TextField
@@ -88,7 +84,7 @@ export default function Mail(props) {
         rows={10}
         variant="outlined"
         value={props.Mailcontent}
-        onChange={props.handleContentChange} // Make sure this handler updates the props.content
+        onChange={props.handleContentChange} 
         fullWidth
         sx={{
           marginBottom: "20px",
@@ -136,7 +132,7 @@ export default function Mail(props) {
       <Button
         variant="contained"
         sx={{ boxShadow: props.boxShadow, backgroundColor: "rgba(4, 230, 251, 0.8)" }}
-        onClick={handleSubmit} // Trigger the email send process
+        onClick={handleSubmit} 
       >
         Send to Future
       </Button>

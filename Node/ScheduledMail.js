@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer');
 const schedule = require('node-schedule');
 
-// Step 1: Set up the email transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -17,8 +16,8 @@ const mailOptions = {
   text: 'This is a test email sent using Node.js and scheduled with node-schedule. It includes images and videos.',
   attachments: [
     {
-      filename: 'note.png', // Image attachment
-      path: 'note.png',   // Path to the image file
+      filename: 'note.png', 
+      path: 'note.png',   
     },
    /* {
       filename: 'example-video.mp4', // Video attachment
