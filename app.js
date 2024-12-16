@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 
 // router imports
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const notesRouter = require('./routes/notes');
 
 // initialize an express app object
 // and configure the dotenv module to parse .env file
@@ -23,7 +23,7 @@ app.set('view engine', false);
 // setting up a database connection
 // to MongoDB 
 mongoose.set("strictQuery", false);
-const mongoDB = process.env.MONGODB_URI;
+const mongoDB = process.env.MONGO_URI;
 
 main().catch((err) => console.log(err));
 async function main(){
@@ -40,7 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/notes', notesRouter);
 
 // the code below is a basic implementation of error handling
 // it defaults to express's error handler if no handler was found
