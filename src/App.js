@@ -5,24 +5,24 @@ import grass from './images/grass.png';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 import Main from "./components/Main.js";
 import LoadingSpinner from './components/LoadingSpinner';
-import eggcrack from './sounds/eggcrack.m4a'
-import EmailForm from './components/EmailForm.js';
+import eggcrack from './sounds/eggcrack.m4a';
 import Mail from './components/Mail.js';
+
 function App() {
   const [boxShadow, setBoxShadow] = useState("0 0 80px rgba(245, 237, 4, 1)");
   const [displayText, setDisplayText] = useState("");
   const [pgNumber, setPgNumber] = useState(1);
   const [loading, setLoading] = useState(false);  
-  const [dev,setDev] = useState("");
+  const [dev, setDev] = useState("");  
   const audioRef = useRef(null); 
-
-
 
   const playAudio = () => {
     if (audioRef.current) {
       audioRef.current.play(); 
     }
   };
+
+  
 
   function updatePage() {
     playAudio();
@@ -31,11 +31,10 @@ function App() {
       p = p === 1 ? 2 : 1;
       return p;
     });
-
   }
 
-  const text = ['Hey!', 'I am, Rizen', 'Wondering, What it is?', 'You wont believe me', 'It is a', 'Time Capsule!!', "Click on it's top"];
-  
+  const text = ['Hey!', 'I am, Rizen', 'Wondering, What it is?', 'You wont believe me', 'It is a', 'Time Capsule!!', "Click on it's top to open"];
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setBoxShadow((prevBoxShadow) =>
@@ -95,23 +94,17 @@ function App() {
     const dispEl = document.querySelector('.display-dev');
     dispEl.style.opacity = '1';
     if(num == 1){
-        
-        setDev("Hasith S & Hemanth R");
-        setTimeout(()=>{
-          dispEl.style.opacity='0';
-        },2000)
+      setDev("Hasith S & Hemanth R");
+      setTimeout(()=>{ dispEl.style.opacity='0'; },2000)
     }else if(num == 2){
-        setDev("Muhammad Numaan Ahmad Azad");
-        setTimeout(()=>{
-          dispEl.style.opacity='0';
-        },2000)
+      setDev("Muhammad Numaan Ahmad Azad");
+      setTimeout(()=>{ dispEl.style.opacity='0'; },2000)
     }else{
-        setDev("Vizhal A");
-        setTimeout(()=>{
-          dispEl.style.opacity='0';
-        },2000)
+      setDev("Vizhal A");
+      setTimeout(()=>{ dispEl.style.opacity='0'; },2000)
     }
   }
+
   return (
     <Router>
       <Routes>
@@ -119,7 +112,6 @@ function App() {
           path="/"
           element={
             <div className={`page-container ${loading ? "loading" : ""}`}>
-              {/* Overlay for dull effect */}
               {loading && <div className="loading-overlay"></div>}
   
               {loading ? (
@@ -127,15 +119,14 @@ function App() {
               ) : pgNumber === 1 ? (
                 <div className="outer">
                   <div className="head">
-                  
                     <h5>RIZEN TORQUE</h5>
                     <div className="cont">
                       <div className="display-dev">{dev}</div>
                     </div>
                     <div className="about">
-                      <h6 onClick={()=>displayDev(1)}>Front-end</h6>
-                      <h6 onClick={()=>displayDev(2)}>Back-end</h6>
-                      <h6 onClick={()=>displayDev(3)}>Documentation</h6>
+                      <h6 onClick={() => displayDev(1)}>Front-end</h6>
+                      <h6 onClick={() => displayDev(2)}>Back-end</h6>
+                      <h6 onClick={() => displayDev(3)}>Documentation</h6>
                     </div>
                   </div>
   
@@ -157,10 +148,8 @@ function App() {
         />
       </Routes>
 
-      {/* Audio element that will be played when capsule is clicked */}
       <audio ref={audioRef} src={eggcrack} preload="auto"></audio>
     </Router>
-    
   );
 }
 

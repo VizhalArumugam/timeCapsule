@@ -1,20 +1,43 @@
-const { HfInference } = require("@huggingface/inference");
+const express = require('express');
+const { HfInference } = require('@huggingface/inference');
+const cors = require('cors');
 
-const client = new HfInference("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");
+const app = express();
+const client = new HfInference('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');
+const memory = []; 
 
-async function main() {
-  const chatCompletion = await client.chatCompletion({
-    model: "mistralai/Mistral-7B-Instruct-v0.3",
-    messages: [
-      {
-        role: "user",
-        content: "Take the following promts as input and talk like me,1)Yo!man whatsup?how is your day,huh 2)Huh son of a ! the day sucks man 3)Yoo! how are you buddy, cool man; this is how i talk, so frame 4 sentences like me"
-      }
-    ],
-    max_tokens: 500
-  });
+app.use(cors());
+app.use(express.json());
 
-  console.log(chatCompletion.choices[0].message);
-}
+app.post('/chat', async (req, res) => {
+  const { message,userName } = req.body;
+  console.log(userName)
+  memory.push({ role: 'user', content: message });
+  try {
+    const chatCompletion = await client.chatCompletion({
+      model: 'mistralai/Mistral-7B-Instruct-v0.3',
+      messages: [
+        {
+          role: 'system',
+          content: `You are ${userName} from the future. Respond concisely, offering wisdom and advice from the future as a more experienced version of ${userName} in a more casual and human way.`
+        },
+        ...memory
+      ],
+      max_tokens: 150, 
+    });
 
-main().catch(console.error);
+    const botReply = chatCompletion.choices[0].message.content;
+
+    memory.push({ role: 'assistant', content: botReply });
+
+    res.json({ reply: botReply });
+  } catch (error) {
+    console.error('Error during chat with Hugging Face model:', error);
+    res.status(500).json({ error: 'Failed to process the chat' });
+  }
+});
+
+const PORT = 5001; 
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});

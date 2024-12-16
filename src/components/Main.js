@@ -17,10 +17,19 @@ export default function Main(props) {
     const [boxShadow, setBoxShadow] = useState("0 0 80px rgba(4,230,251,1)");
     const [optionNumber, setOptionNumber] = useState(1);
     
+    const [userName, setUserName] = useState(localStorage.getItem('userName') || 'user');
     const navigate = useNavigate(); 
 
     const [Mailcontent, setMailContent] = useState(""); // Manage content state
 
+
+    const handleNameSubmit = () => {
+        if (userName.trim() !== '') {
+          alert("Great! Go ahead Time Traveller")
+          localStorage.setItem('userName', userName); // Save to localStorage
+
+        }
+      };
     const handleContentChange = (event) => {
         setMailContent(event.target.value); // Update content state when the user types
     };
@@ -80,7 +89,16 @@ export default function Main(props) {
             <video className="vid" src={futuristicVid} autoPlay loop muted>
                 Your browser does not support the video tag.
             </video>
-
+            <div className='user-info'>
+                                  <input 
+                                    type="text" 
+                                    placeholder="Enter your name Traveller!"
+                                    value={userName}
+                                    onChange={(e) => setUserName(e.target.value)}
+                                    className='userName'
+                                  />
+                                  <button onClick={handleNameSubmit}>Set Name</button>
+                                </div>
             <div className="options-container">
                 <div>
                     <Box className="option" onClick={() => updateOptionNumber(1)} sx={{ boxShadow: boxShadow }}>
@@ -108,7 +126,8 @@ export default function Main(props) {
                 handleContentChange={handleContentChange}
                 boxShadow={boxShadow} />
             ) : optionNumber === 2 ? (
-                <Chat />
+                <Chat 
+                userName = {userName}/>
             ) : (
                 <Diary />
             )}

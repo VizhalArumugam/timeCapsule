@@ -18,7 +18,6 @@ button {
   animation: sparkleAnimation 3s infinite, moveAnimation 5s linear infinite;
 }
 
-/* Random movement animation */
 @keyframes moveAnimation {
   0% {
     top: 10%;
@@ -162,8 +161,8 @@ button {
   resize: none;
   background-color: transparent;
   padding: 25px;
-  white-space: pre-wrap; /* Ensures text wraps and respects new lines */
-  overflow-y: auto; /* Allows scrolling if content exceeds the height */
+  white-space: pre-wrap;
+  overflow-y: auto;
   resize: none;
   border: none;
   outline: none;
@@ -180,6 +179,14 @@ button {
 .retro-card button:hover {
   color: rgb(1, 39, 104);
   background-color: rgb(255, 255, 255);
+}
+
+.MailBody::-moz-placeholder {
+  color: #ff0000;
+}
+
+.MailBody::placeholder {
+  color: #ff0000;
 }
 
 .chat-card {
@@ -213,8 +220,8 @@ button {
 }
 
 .spinner {
-  border: 4px solid #f3f3f3; /* Light gray */
-  border-top: 4px solid #3498db; /* Blue */
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -236,4 +243,32 @@ button {
 
 .page-container.loading {
   opacity: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  top: 20px;
+}
+.user-info button {
+  margin-left: 20px;
+  color: #fff;
+  background-color: rgb(0, 63, 131);
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  transition: box-shadow 0.15s;
+}
+.user-info button:hover {
+  box-shadow: 0px 0px 20px rgb(4, 230, 251);
+}
+
+.userName {
+  outline: none;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 50px;
 }/*# sourceMappingURL=main1.css.map */

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { TextField, Button, Box, IconButton, Typography } from "@mui/material"; // Importing MUI components
+import { TextField, Button, Box, IconButton, Typography } from "@mui/material"; 
 import FolderIcon from "@mui/icons-material/Folder"; 
 import axios from "axios"; 
-
+import  "../styles/main1.css"
 export default function Mail(props) {
   const [file, setFile] = useState(null); 
   const [email, setEmail] = useState(""); 
@@ -13,7 +13,7 @@ export default function Mail(props) {
     setFile(selectedFile); 
     console.log("Selected file:", selectedFile);
   };
-
+  let userName = localStorage.getItem('userName');
   const handleFolderClick = () => {
     document.getElementById("fileInput").click();
   };
@@ -37,7 +37,7 @@ export default function Mail(props) {
     const formData = new FormData();
     formData.append("to", recipientEmail);
     formData.append("subject", "Scheduled Email");
-    formData.append("text", props.Mailcontent); 
+    formData.append("text", "Dear future\n"+props.Mailcontent); 
 
     if (file) {
       formData.append("attachment", file);
@@ -80,12 +80,14 @@ export default function Mail(props) {
       />
 
       <TextField
+        className="MailBody"
         multiline
         rows={10}
         variant="outlined"
         value={props.Mailcontent}
         onChange={props.handleContentChange} 
         fullWidth
+        placeholder={`Write a message to future fella, ${userName}`}
         sx={{
           marginBottom: "20px",
           backgroundColor: "transparent",
@@ -112,11 +114,10 @@ export default function Mail(props) {
         }}
       />
 
-      {/* File name or preview */}
       {file && (
         <Box sx={{ marginTop: "10px" }}>
           <Typography variant="body1">Selected File: {file.name}</Typography>
-          {/* Display preview for images or videos */}
+        
           {file.type.startsWith("image") && (
             <img src={URL.createObjectURL(file)} alt="preview" width="100px" />
           )}

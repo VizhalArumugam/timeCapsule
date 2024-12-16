@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 
 const scheduleEmail = (to, subject, text, attachment, scheduleDate) => {
   const mailOptions = {
-    from: 'harsithharsith217@gmail.com', 
+    from: 'Rizen Torque', 
     to,
     subject,
     text,
@@ -51,7 +51,7 @@ app.post('/send-email', upload.single('attachment'), async (req, res) => {
       res.status(200).json({ message: 'Email scheduled successfully!' });
     } else {
       const mailOptions = {
-        from: 'harsithharsith217@gmail.com', 
+        from: 'Rizen Torque', 
         to,
         subject,
         text, 
